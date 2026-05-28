@@ -1,0 +1,22 @@
+# SkillTrain Default Configuration
+# Copy to config.yaml and customize for your workflow.
+
+model:
+  target: deepseek-v4-pro:cloud       # Model your agent uses
+  optimizer: deepseek-v4-pro:cloud    # Model for reflection (can be same)
+
+train:
+  epochs: 4                           # Number of training epochs
+  steps_per_epoch: 4                  # Rollout + reflect cycles per epoch
+  batch_size: 4                       # Tasks per rollout batch
+  accumulation: 1                     # Batches to accumulate before update
+
+optimizer:
+  learning_rate: 4                    # Max edits per step (cosine start)
+  min_learning_rate: 1                # Min edits per step (cosine end)
+  lr_schedule: cosine                 # constant | linear | cosine | autonomous
+  skill_update_mode: patch            # patch (default) | full_rewrite
+
+evaluation:
+  val_split: 0.2                      # Fraction of training data for validation
+  hard_score_threshold: 0.7           # Scores below this are "failures"
